@@ -1,0 +1,15 @@
+# Obsidian per-device state (keep shared settings, ignore volatile files)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local Claude Code permissions
+.claude/settings.local.json
+
+# Maintainer notes (migrating to GitHub issues)
+BACKLOG.md
