@@ -39,6 +39,24 @@ Say anything — the setup interview starts on first contact. Answer the questio
 
 Afterwards, open the folder as a vault in Obsidian.
 
+## Day-to-day use
+
+The mental model: **Obsidian is the IDE, Claude is the engine, the vault is the codebase.** You talk; Claude writes, files, links, and maintains. You browse the results in Obsidian — graph view, backlinks, mobile capture.
+
+A typical day:
+
+1. **Open Claude Code in the vault.** Your CLAUDE.md loads automatically; Claude checks the inbox and offers to file what's there.
+2. **Orient** — "where did I leave off?" gets you a briefing from your recent daily notes and active projects.
+3. **Capture by just talking.** Quick-capture keywords file themselves; anything unclear lands in the inbox; every todo you mention is double-filed (project page + today's daily note, linked).
+4. **Feed it** — drop a PDF, screenshot, or article into the vault and say "ingest this".
+5. **Use what it knows** — ask questions and `query` answers from *your own notes*, with citations, filing good syntheses back in so explorations compound. "Compare X and Y" triggers `research`; a new idea goes through `brainstorming`; "grill me" stress-tests a plan.
+6. **Close the day** — Claude offers a daily-note summary, and if you confirm the day is done, an honest verdict: what moved, what's stuck.
+7. **Close the week** — `weekly-review`: progress vs. busyness, next week's focus, optional health check.
+
+Two habits make it compound: say **"remember this"** whenever you notice a preference (it accretes into your context files — the vault gets more *you* over time), and **"backup"** to push to your private repo.
+
+**Single-window tip:** the [Claudian](https://github.com/YishenTu/claudian) community plugin embeds Claude Code directly inside Obsidian, so you don't need a separate terminal. Install it from Community Plugins ("Claudian"); requires the Claude Code CLI, desktop only. Optional — the two-window workflow works just as well.
+
 ## Updating later
 
 Your generated CLAUDE.md records this template's URL. Say **"update skills"** in your vault and Claude clones the latest template to a temp folder, shows you what changed in the skills (including anything you customized locally), and applies only what you approve — your notes and your personal CLAUDE.md are never touched. Requires this repo's URL to still be reachable.
@@ -65,6 +83,7 @@ Tools, methods, and sources this template builds on:
 - [mattpocock/skills](https://github.com/mattpocock/skills) — origin of the `grill-me` skill
 - [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills) — additional Obsidian-specific skills worth installing
 - [Iconize](https://github.com/FlorianWoelki/obsidian-icon-folder) (obsidian-icon-folder) — optional plugin for the folder icons
+- [Claudian](https://github.com/YishenTu/claudian) — optional Obsidian plugin embedding Claude Code directly in the vault
 - [qmd](https://github.com/tobi/qmd) by Tobi Lütke — optional local full-text + semantic search
 
 ## License
