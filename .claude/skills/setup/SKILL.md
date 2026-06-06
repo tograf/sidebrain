@@ -188,7 +188,8 @@ specific project.) If yes, tell me the keyword and where the entry should go. If
 this."
 
 For each quick capture mentioned, note down: **keyword(s)**, **target file**, and optionally a
-**status tag**. These go into the CLAUDE.md later. If the user names a target file that doesn't
+**status tag** — only if the user actually named one; never invent a tag on their behalf. These
+go into the CLAUDE.md later. If the user names a target file that doesn't
 exist yet (e.g., a backlog), create it in Phase 8 right away.
 
 ---
@@ -231,9 +232,11 @@ the folder names (keeping the `NN-` prefixes and the hyphenation rule) — the g
 
 Insert the actual names for projects, areas, and resources. **Neither folders nor files contain
 spaces** — write both capitalized with hyphens (so "Content-Creation" and "About-Me.md" rather
-than "Content Creation" or "about me.md"). Starter files inside area/resource folders mirror the
-folder name exactly (e.g., `Content-Creation/Content-Creation.md`). Note titles (the `# heading`
-inside a note) may use normal spacing — only the names on disk are hyphenated.
+than "Content Creation" or "about me.md"). Drop apostrophes and other punctuation from disk
+names ("Master's Thesis" → `Masters-Thesis.md`). Starter files inside area/resource folders
+mirror the folder name exactly (e.g., `Content-Creation/Content-Creation.md`). Note titles (the
+`# heading` inside a note) may use normal spacing and punctuation — only the names on disk are
+restricted.
 
 IMPORTANT:
 - **Projects** start as single .md files directly under 02-Projects/. Do NOT create a subfolder
