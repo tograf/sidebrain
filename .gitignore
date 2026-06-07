@@ -11,3 +11,6 @@ Thumbs.db
 # Local Claude Code permissions
 .claude/settings.local.json
 
+
+# Claudian session metadata (keep settings, ignore per-session files)
+.claudian/sessions/
