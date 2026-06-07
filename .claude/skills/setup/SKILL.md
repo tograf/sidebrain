@@ -194,6 +194,23 @@ exist yet (e.g., a backlog), create it in Phase 8 right away.
 
 ---
 
+## Phase 6c: Remote Capture via Signal (optional)
+
+Offer phone capture briefly:
+
+> One more optional thing: I can wire up Signal so that anything you send to "Note to Self" on
+> your phone lands in the vault's inbox at the next session start — quick-capture keywords
+> included. Your notes stay end-to-end encrypted; the bridge is signal-cli, linked to your
+> account as an extra device (like Signal Desktop).
+
+**Question 13:** "Do you want to capture notes from your phone via Signal's Note to Self? You
+need Signal on your phone and the signal-cli tool on this machine (I'll check what's installed).
+Takes about 10 minutes including a QR scan. If not, skip it — this can be added anytime later."
+
+If declined, skip Phase 8.9 — no second prompt. If accepted, note it for Phase 8.9.
+
+---
+
 ## Phase 7: Summary and Confirmation
 
 Show the user a draft of the planned folder structure, rendered as a tree:
@@ -746,6 +763,39 @@ If the user declines, skip ahead — no second prompt. If the user accepts:
 
 NEVER create a public repo here, and never push without the user having seen what the remote is.
 
+### 8.9 Optional: Signal phone capture (only if chosen in Phase 6c)
+
+Wire Signal's Note to Self into the inbox flow. Architecture: phone → Note to Self (end-to-end
+encrypted) → signal-cli on this machine (linked device) → drain script → inbox.
+
+1. **Check tooling:** `command -v signal-cli` and `command -v qrencode`. If signal-cli is
+   missing, the user installs it themselves (it usually needs sudo — suggest the `!` prefix):
+   AUR package `signal-cli`, Homebrew `signal-cli`, or https://github.com/AsamK/signal-cli.
+   If it can't be installed, skip this step and note the vault works fine without it.
+2. **Link as device:** run `signal-cli link -n "vault-pc"` in the background — it prints a
+   `sgnl://linkdevice?...` URI on its first output line, then blocks until the QR is scanned.
+   Render the URI as a QR code in the terminal: `qrencode -t ansiutf8 "<uri>"`. The user scans
+   it via Signal → Settings → Linked devices → Link new device. The URI expires after roughly a
+   minute — on "Connection closed", generate a fresh one and tell the user to have their phone
+   ready first. After linking succeeds, run `signal-cli receive --timeout 10` once for the
+   initial sync.
+3. **Install the drain script:** copy `assets/signal-inbox.py` (next to this SKILL.md) to
+   `.claude/tools/signal-inbox.py` in the vault. Set its `INBOX_FOLDER` constant to the ACTUAL
+   inbox folder name from 8.1 (translated in a non-English vault).
+4. **Wire the generated CLAUDE.md:** prepend a new step 1 to "At session start": run
+   `python3 .claude/tools/signal-inbox.py`; new Note-to-Self messages land in
+   [inbox]/Signal-Captures.md; entries starting with a quick-capture keyword are filed per
+   their rule, the rest are treated like inbox notes; clear the buffer file (keep its header)
+   once everything is filed. If quick captures were defined in Phase 6b, add a sentence to the
+   "Quick captures" section saying the keywords also work remotely via Note to Self.
+5. **Test end-to-end:** the user sends a message to Note to Self (ideally starting with a
+   quick-capture keyword), run the drain script, file the entry per its rule, clear the buffer.
+   Only call it done once the full round trip worked.
+6. **Mention the caveats honestly:** signal-cli is an unofficial client and occasionally needs
+   an update when Signal changes its protocol; a linked device that stays offline for ~30 days
+   gets unlinked (re-scan the QR code then); disappearing messages must stay off for Note to
+   Self, or captures self-destruct before the drain.
+
 ---
 
 ## Phase 9: Wrap-Up
@@ -764,6 +814,7 @@ Once everything is in place, give a brief overview:
 > - [X] Folder icons set [only mention if Phase 8.6 was executed]
 > - [X] Template files removed and git history reset — this vault is fully yours now
 > - [X] Private GitHub backup repo connected [only mention if Phase 8.8 was executed; if skipped, list it under "What's next" as something that can be added anytime]
+> - [X] Signal phone capture wired: Note to Self lands in the inbox at session start [only mention if Phase 8.9 was executed]
 >
 > **What's next:**
 >
