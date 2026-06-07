@@ -757,7 +757,7 @@ Once everything is in place, give a brief overview:
 > - [X] Starter notes for [number] projects
 > - [X] Starter notes for [number] areas
 > - [X] Starter notes for [number] resource topics
-> - [X] Obsidian configured: attachments land automatically in 07-Attachments/
+> - [X] Obsidian configured: attachments land in 07-Attachments/, the daily-note button files into 05-Daily-Notes/ as YYYY-MM-DD
 > - [X] Folder icons set [only mention if Phase 8.6 was executed]
 > - [X] Template files removed and git history reset — this vault is fully yours now
 > - [X] Private GitHub backup repo connected [only mention if Phase 8.8 was executed; if skipped, list it under "What's next" as something that can be added anytime]
