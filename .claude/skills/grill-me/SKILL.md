@@ -1,9 +1,8 @@
 ---
 name: grill-me
 description: Interview the user relentlessly about a plan, decision, or idea until reaching shared understanding, resolving each branch of the decision tree. Use when the user wants to stress-test a plan, get challenged on their thinking, or mentions "grill me".
+credits: Adapted from https://github.com/mattpocock/skills (skills/productivity/grill-me) for second-brain / knowledge-work use.
 ---
-
-<!-- Adapted from https://github.com/mattpocock/skills (skills/productivity/grill-me) for second-brain / knowledge-work use. -->
 
 Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one by one. For each question, provide your recommended answer.
 

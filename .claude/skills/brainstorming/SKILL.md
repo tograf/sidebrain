@@ -1,9 +1,8 @@
 ---
 name: brainstorming
 description: Use this before any substantial new undertaking in the vault — starting a project, planning a piece of content, structuring a new area or topic. Explores intent, constraints, and options through dialogue before anything gets written into the vault.
+credits: Adapted from https://github.com/obra/superpowers (skills/brainstorming), originally written for software development. Reworked here for knowledge work in a second-brain vault.
 ---
-
-<!-- Adapted from https://github.com/obra/superpowers (skills/brainstorming), originally written for software development. Reworked here for knowledge work in a second-brain vault. -->
 
 # Brainstorming Ideas Into Plans
 
