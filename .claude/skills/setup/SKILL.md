@@ -332,7 +332,7 @@ This vault is the second brain of [name].
 - When you move something to the archive, take all related files along (scripts, attachments, subfiles) and leave nothing orphaned.
 - Briefly explain why you're creating or moving a file.
 - Ask before deleting or overwriting anything.
-- **Icon assignment for new folders** [ONLY include this rule if the Icon Folder plugin was present in Phase 1 — omit it entirely otherwise]: Whenever you create a folder anywhere in the vault, add an entry to `.obsidian/plugins/obsidian-icon-folder/data.json` in the same step so the icon plugin shows a fitting symbol. Schema: `"relative/path": "emoji"` as a top-level key next to the existing entries (NOT inside `settings`). Pick a thematically fitting emoji that matches the style of the neighboring folders. **Individual files get NO icon** — this applies to folders only.
+- **Icon assignment for new folders** [ONLY include this rule if the Icon Folder plugin was present in Phase 1 — omit it entirely otherwise]: Whenever you create a folder anywhere in the vault, add an entry to `.obsidian/plugins/obsidian-icon-folder/data.json` in the same step so the icon plugin shows a fitting symbol. Schema: `"relative/path": "emoji"` as a top-level key next to the existing entries (NOT inside `settings`). If the file doesn't exist yet, create it with an empty `"settings": {}` key first — Iconize fails to load when that key is missing. Pick a thematically fitting emoji that matches the style of the neighboring folders. **Individual files get NO icon** — this applies to folders only.
 - When the user says "remember this" or "save this", file it where it belongs thematically: writing rules go to 00-Context/Writing-Style.md, project info into the respective project file, technical insights to 04-Resources/, vault rules into this CLAUDE.md. If unsure, ask briefly.
 
 ## Todo rule (IMPORTANT)
@@ -675,12 +675,15 @@ briefly note that icons can be set later once the plugin is installed.]
 Assign a fitting emoji icon to EVERY created folder (top-level AND the subfolders under
 Areas/Resources). Edit `.obsidian/plugins/obsidian-icon-folder/data.json` for this. Each icon is
 a top-level key in the format `"relative/path": "emoji"` next to the existing entries (NOT inside
-`settings`). If the file doesn't exist yet, create it. The keys MUST be the actual folder names
+`settings`). If the file doesn't exist yet, create it WITH an empty `"settings": {}` key —
+Iconize reads `data.settings` unguarded on load, so a data.json without that key makes the
+plugin fail to enable ("Failed to load plugin"). The icon keys MUST be the actual folder names
 created in 8.1 — translated names in a non-English vault, never the English defaults below.
 
 Suggestion for the standard folders (English-default example, freely adjustable):
 ```json
 {
+  "settings": {},
   "00-Context": "🧭",
   "01-Inbox": "📥",
   "02-Projects": "🎯",
