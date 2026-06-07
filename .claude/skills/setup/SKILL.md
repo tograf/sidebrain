@@ -774,10 +774,12 @@ encrypted) → signal-cli on this machine (linked device) → drain script → i
    If it can't be installed, skip this step and note the vault works fine without it.
 2. **Link as device:** run `signal-cli link -n "vault-pc"` in the background — it prints a
    `sgnl://linkdevice?...` URI on its first output line, then blocks until the QR is scanned.
-   Render the URI as a QR code in the terminal: `qrencode -t ansiutf8 "<uri>"`. The user scans
-   it via Signal → Settings → Linked devices → Link new device. The URI expires after roughly a
-   minute — on "Connection closed", generate a fresh one and tell the user to have their phone
-   ready first. After linking succeeds, run `signal-cli receive --timeout 10` once for the
+   Render the URI as a QR code in the terminal: `qrencode -t ansiutf8 "<uri>"`. IMPORTANT:
+   Claude Code truncates long tool output — tell the user they may need to expand the output
+   (ctrl+o) to see the complete QR code, otherwise the scan fails on a half-rendered code. The
+   user scans it via Signal → Settings → Linked devices → Link new device. The URI expires after
+   roughly a minute — on "Connection closed", generate a fresh one and tell the user to have
+   their phone ready first. After linking succeeds, run `signal-cli receive --timeout 10` once for the
    initial sync.
 3. **Install the drain script:** copy `assets/signal-inbox.py` (next to this SKILL.md) to
    `.claude/tools/signal-inbox.py` in the vault. Set its `INBOX_FOLDER` constant to the ACTUAL
