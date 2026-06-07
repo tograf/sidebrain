@@ -650,9 +650,22 @@ name, not the English default. English-default example:
 
 If the file already contains other settings, add only this key-value pair to the existing JSON.
 
-Let the user know: "I've configured Obsidian so that images and other files you paste into notes
-automatically land in the 07-Attachments/ folder. If the setting doesn't take effect right away,
-restart Obsidian once."
+Also configure Obsidian's **Daily Notes core plugin** so its "Open today's daily note" button
+creates notes exactly where the todo rule expects them (instead of Obsidian's default: vault
+root, different date format). Write `.obsidian/daily-notes.json` — again with the ACTUAL daily
+folder name created in 8.1:
+
+```json
+{
+  "folder": "05-Daily-Notes",
+  "format": "YYYY-MM-DD"
+}
+```
+
+Let the user know: "I've configured Obsidian so that pasted images land in the attachments
+folder and the built-in daily-note button files notes into [daily folder] as YYYY-MM-DD — both
+matching the vault's conventions. If a setting doesn't take effect right away, restart Obsidian
+once."
 
 ### 8.6 Set folder icons
 
