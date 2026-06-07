@@ -8,6 +8,7 @@
 - **Context profile** (`00-Context/`) — About Me and Writing Style for everyone; ICP, Offer, and Branding added when you work with clients or an audience. Claude consults these before writing content, emails, or offers on your behalf.
 - **PARA structure** — Inbox, Projects, Areas, Resources, Daily Notes, Archive, Attachments.
 - **Working rules baked in** — atomic notes, wikilinks, a strict two-place todo rule (detail page + linked daily note), session routines, and honest end-of-day feedback on request.
+- **Phone capture via Signal (optional)** — anything you send to Signal's "Note to Self" lands in the vault's inbox at the next session start, end-to-end encrypted, quick-capture keywords included. Wired up during setup if you want it.
 - **Skills** (`.claude/skills/`):
   - `brainstorming` — turns a rough idea into an approved plan before anything is written into the vault (adapted from [obra/superpowers](https://github.com/obra/superpowers))
   - `grill-me` — relentless one-question-at-a-time stress-testing of a plan or decision (adapted from [mattpocock/skills](https://github.com/mattpocock/skills))
@@ -26,6 +27,7 @@ All skills work without extra tools and automatically use [qmd](https://github.c
 - [Claude Code](https://claude.com/claude-code) — the agent this template is built and tested with (others may work via `AGENTS.md`, but are untested)
 - [Obsidian](https://obsidian.md) (free)
 - Optional: the [Iconize](https://github.com/FlorianWoelki/obsidian-icon-folder) community plugin — setup assigns folder icons if it's installed
+- Optional: [signal-cli](https://github.com/AsamK/signal-cli) and `qrencode` — setup can wire Signal's Note to Self into the inbox for capture from your phone
 
 ## Getting started
 
@@ -57,6 +59,12 @@ Two habits make it compound: say **"remember this"** whenever you notice a prefe
 
 **Single-window tip:** the [Claudian](https://github.com/YishenTu/claudian) community plugin embeds Claude Code directly inside Obsidian, so you don't need a separate terminal. Install it from Community Plugins ("Claudian"); requires the Claude Code CLI, desktop only. Optional — the two-window workflow works just as well.
 
+## Optional: phone capture via Signal
+
+Ideas rarely strike at your desk. During setup (or anytime later — "set up Signal capture"), Claude links your machine to your Signal account as an extra device, exactly like Signal Desktop: install [signal-cli](https://github.com/AsamK/signal-cli), scan one QR code, done. From then on, anything you send to **Note to Self** on your phone is drained into the vault's inbox at the next session start and filed like any other capture — quick-capture keywords ("todo: …") work from your phone too. End-to-end encrypted the whole way; your notes never sit in plaintext outside your own devices.
+
+Honest caveats: signal-cli is an unofficial client and occasionally needs an update when Signal changes its protocol; a linked device that stays offline for ~30 days is unlinked (re-scan the QR code); disappearing messages must stay off for Note to Self. Prefer something else? Obsidian Sync, Syncthing, or a mobile git client work too — Signal is simply the lowest-friction option the setup can wire automatically.
+
 ## Updating later
 
 Your generated CLAUDE.md records this template's URL. Say **"update skills"** in your vault and Claude clones the latest template to a temp folder, shows you what changed in the skills (including anything you customized locally), and applies only what you approve — your notes and your personal CLAUDE.md are never touched. Requires this repo's URL to still be reachable.
@@ -84,6 +92,7 @@ Tools, methods, and sources this template builds on:
 - [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills) — additional Obsidian-specific skills worth installing
 - [Iconize](https://github.com/FlorianWoelki/obsidian-icon-folder) (obsidian-icon-folder) — optional plugin for the folder icons
 - [Claudian](https://github.com/YishenTu/claudian) — optional Obsidian plugin embedding Claude Code directly in the vault
+- [signal-cli](https://github.com/AsamK/signal-cli) — optional CLI Signal client powering the phone-capture bridge
 - [qmd](https://github.com/tobi/qmd) by Tobi Lütke — optional local full-text + semantic search
 
 ## License
