@@ -201,7 +201,8 @@ Offer phone capture briefly:
 > One more optional thing: I can wire up Signal so that anything you send to "Note to Self" on
 > your phone lands in the vault's inbox at the next session start — quick-capture keywords
 > included. Your notes stay end-to-end encrypted; the bridge is signal-cli, linked to your
-> account as an extra device (like Signal Desktop).
+> account as an extra device (like Signal Desktop). The drain can run automatically through a
+> small SessionStart hook, or stay manual — your call, and either can be changed later.
 
 **Question 13:** "Do you want to capture notes from your phone via Signal's Note to Self? You
 need Signal on your phone and the signal-cli tool on this machine (I'll check what's installed).
@@ -784,16 +785,38 @@ encrypted) → signal-cli on this machine (linked device) → drain script → i
 3. **Install the drain script:** copy `assets/signal-inbox.py` (next to this SKILL.md) to
    `.claude/tools/signal-inbox.py` in the vault. Set its `INBOX_FOLDER` constant to the ACTUAL
    inbox folder name from 8.1 (translated in a non-English vault).
-4. **Wire the generated CLAUDE.md:** prepend a new step 1 to "At session start": run
-   `python3 .claude/tools/signal-inbox.py`; new Note-to-Self messages land in
-   [inbox]/Signal-Captures.md; entries starting with a quick-capture keyword are filed per
-   their rule, the rest are treated like inbox notes; clear the buffer file (keep its header)
-   once everything is filed. If quick captures were defined in Phase 6b, add a sentence to the
-   "Quick captures" section saying the keywords also work remotely via Note to Self.
-5. **Test end-to-end:** the user sends a message to Note to Self (ideally starting with a
-   quick-capture keyword), run the drain script, file the entry per its rule, clear the buffer.
-   Only call it done once the full round trip worked.
-6. **Mention the caveats honestly:** signal-cli is an unofficial client and occasionally needs
+4. **Offer the auto-drain hook (optional, recommended):** ask whether the drain should run on its
+   own at the start of each session, or stay manual. The hook only does the *pull*; filing the
+   captures still happens in-session, since that needs judgment. If the user wants it, create
+   `.claude/settings.json` with a SessionStart hook that runs the drain script:
+   ```json
+   {
+     "hooks": {
+       "SessionStart": [
+         { "matcher": "startup|resume", "hooks": [ { "type": "command", "command": "python3 .claude/tools/signal-inbox.py" } ] }
+       ]
+     }
+   }
+   ```
+   If a `.claude/settings.json` already exists, merge the SessionStart hook into it rather than
+   overwriting. If the user declines, skip the file and tell them it can be added (or removed)
+   anytime later — both the capture and the hook are optional.
+5. **Wire the generated CLAUDE.md "At session start":**
+   - **Hook installed:** note that Signal captures drain automatically via the SessionStart hook
+     (`.claude/settings.json` runs `.claude/tools/signal-inbox.py`); when its output reports new
+     Note-to-Self messages in [inbox]/Signal-Captures.md, file each per its quick-capture rule,
+     treat the rest as inbox notes, then clear the buffer file (keep its header); manual fallback
+     `python3 .claude/tools/signal-inbox.py` if the hook didn't run.
+   - **Manual (no hook):** prepend a step to "At session start" that runs
+     `python3 .claude/tools/signal-inbox.py`, then files new messages from
+     [inbox]/Signal-Captures.md the same way and clears the buffer.
+   If quick captures were defined in Phase 6b, add a sentence to the "Quick captures" section
+   saying the keywords also work remotely via Note to Self.
+6. **Test end-to-end:** the user sends a message to Note to Self (ideally starting with a
+   quick-capture keyword), run the drain script (or restart the session if the hook is installed),
+   file the entry per its rule, clear the buffer. Only call it done once the full round trip
+   worked.
+7. **Mention the caveats honestly:** signal-cli is an unofficial client and occasionally needs
    an update when Signal changes its protocol; a linked device that stays offline for ~30 days
    gets unlinked (re-scan the QR code then); disappearing messages must stay off for Note to
    Self, or captures self-destruct before the drain.

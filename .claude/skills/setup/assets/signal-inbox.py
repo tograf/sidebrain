@@ -95,6 +95,11 @@ def main():
     for when, text in captures:
         preview = text if len(text) <= 80 else text[:77] + "..."
         print(f"  [{when}] {preview}")
+    print(
+        f"\nACTION (Claude): file each capture above per the quick-capture rules in "
+        f"CLAUDE.md; treat the rest as inbox notes; then clear "
+        f"{BUFFER.relative_to(VAULT)} back to its header."
+    )
 
 
 if __name__ == "__main__":
