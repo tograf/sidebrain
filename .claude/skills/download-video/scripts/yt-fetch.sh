@@ -161,8 +161,10 @@ attempt_subs() {  # <lang> <"--write-subs"|"--write-auto-subs"> <method> <qualit
 run_whisper() {  # <device> <model>
   local dev="$1" model="$2"
   if [ "$dev" != "cpu" ]; then
-    uvx --with nvidia-cublas-cu12 --with nvidia-cudnn-cu12 \
-        whisper-ctranslate2 --model "$model" --device "$dev" \
+    # GPU: pull the CUDA libs and run via the wrapper that puts them on LD_LIBRARY_PATH
+    # (CTranslate2 won't find them in site-packages on its own). Force device=cuda.
+    uv run --with whisper-ctranslate2 --with nvidia-cublas-cu12 --with nvidia-cudnn-cu12 \
+        python "$SCRIPT_DIR/whisper_gpu.py" --model "$model" --device cuda \
         --output_format vtt --output_dir "$OUTDIR" --task transcribe "$AUDIO" >&2
   else
     uvx whisper-ctranslate2 --model "$model" --device cpu \
