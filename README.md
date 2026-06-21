@@ -13,12 +13,13 @@
   - `brainstorming` — turns a rough idea into an approved plan before anything is written into the vault (adapted from [obra/superpowers](https://github.com/obra/superpowers))
   - `grill-me` — relentless one-question-at-a-time stress-testing of a plan or decision (adapted from [mattpocock/skills](https://github.com/mattpocock/skills))
   - `ingest` — drop in a PDF, e-book, screenshot, or article and it becomes a summarized source note plus atomic linked notes in your resources. Small files need zero extra tools; poppler/pandoc/tesseract unlock big books, EPUBs, and scans
+  - `download-video` — turn a YouTube/Instagram/TikTok link into a vault note: downloads the video into attachments, picks the best transcript (creator subtitles → local Whisper → auto-captions) under a quality gate, then hands off to `ingest`. Needs yt-dlp + ffmpeg; Whisper transcription is optional (via uv/uvx, GPU-accelerated when available)
   - `query` — answers questions from your own notes with wikilink citations, and files synthesized answers back into the vault so explorations compound
   - `research` — deep multi-note study written back as a structured, cited analysis note ("compare X and Y", "deep dive on Z")
   - `vault-lint` — health check: contradictions, broken wikilinks, orphan notes, inbox backlog, convention drift. Report first, fixes only on confirmation
   - `weekly-review` — closes the week: real progress vs. stuck items, honest feedback, a weekly note, and next week's focus
 
-All skills work without extra tools and automatically use [qmd](https://github.com/tobi/qmd) for search when it's installed.
+Most skills work without extra tools and automatically use [qmd](https://github.com/tobi/qmd) for search when it's installed; `download-video` is the exception, needing yt-dlp + ffmpeg (and optionally Whisper).
 
 **Other agents (untested):** the vault ships an `AGENTS.md` pointing to the same instructions, so agents like Codex or Cursor *may* work too — they'd read the skills as written procedures instead of invoking them natively. This template is built and tested with Claude Code only; with other agents, your mileage may vary. Reports welcome.
 
